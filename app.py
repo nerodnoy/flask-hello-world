@@ -8,18 +8,16 @@ from flask import (
     url_for,
     session
 )
-
 from repository import User
 import os
 
 app = Flask(__name__)
 
 # Установка секретного ключа для подписи сессий
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv('SECRET_KEY')
 
 # Использование серверной сессии (в данном примере, используем файловую сессию)
 app.config['SESSION_TYPE'] = 'filesystem'
-
 
 repo = User()
 
