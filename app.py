@@ -8,7 +8,7 @@ from flask import (
     url_for,
     session
 )
-from flask_session import Session
+
 from repository import User
 import os
 
@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 # Использование серверной сессии (в данном примере, используем файловую сессию)
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+
 
 repo = User()
 
