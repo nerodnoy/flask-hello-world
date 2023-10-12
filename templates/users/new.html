@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New user</title>
+</head>
+<body>
+<div>
+    <h1>Registration</h1>
+
+    <form action="{{ url_for('users_new') }}" method="post">
+        <label for="name">Name:</label>
+
+        <br>
+
+        <input type="text" id="name" name="name" value="{{ user.name }}">
+
+        <br>
+
+        {% if errors.name %}
+        <p class="error">{{ errors.name }}</p>
+        {% endif %}
+
+        <br>
+
+        <label for="email">Email:</label>
+
+        <br>
+
+        <input type="email" id="email" name="email" value="{{ user.email }}">
+
+        <br>
+
+        {% if errors.email %}
+        <p class="error">{{ errors.email }}</p>
+        {% endif %}
+
+        <br>
+
+        <button type="submit">Create</button>
+    </form>
+
+</div>
+</body>
+</html>
