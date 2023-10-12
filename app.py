@@ -16,53 +16,51 @@ app = Flask(__name__)
 # Установка секретного ключа для подписи сессий
 app.secret_key = os.getenv('SECRET_KEY')
 
-# Использование серверной сессии (в данном примере, используем файловую сессию)
-app.config['SESSION_TYPE'] = 'filesystem'
-
 repo = User()
 
 
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
+# @app.route('/', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         email = request.form['email']
+#
+#         # Проверяем, что введенный email совпадает с валидным email
+#         users_data = repo.load_user_data()  # Загружаем данные пользователей
+#         valid_emails = [user['email'] for user in users_data]
+#
+#         if email in valid_emails:
+#             # Устанавливаем флаг аутентификации в сессии
+#             session['authenticated'] = True
+#             flash('Вы успешно выполнили вход', 'success')
+#             return redirect(url_for('users'))
+#         else:
+#             return render_template('users/login.html', error='Неверный email')
+#
+#     return render_template('users/login.html', error=None)
 
-        # Проверяем, что введенный email совпадает с валидным email
-        users_data = repo.load_user_data()  # Загружаем данные пользователей
-        valid_emails = [user['email'] for user in users_data]
 
-        if email in valid_emails:
-            # Устанавливаем флаг аутентификации в сессии
-            session['authenticated'] = True
-            flash('Вы успешно выполнили вход', 'success')
-            return redirect(url_for('users'))
-        else:
-            return render_template('users/login.html', error='Неверный email')
-
-    return render_template('users/login.html', error=None)
-
-
-@app.route('/logout')
-def logout():
-    # Удаляем флаг аутентификации из сессии
-    session.pop('authenticated', None)
-    return redirect(url_for('login'))
+# @app.route('/logout')
+# def logout():
+#     # Удаляем флаг аутентификации из сессии
+#     session.pop('authenticated', None)
+#     return redirect(url_for('login'))
 
 
 @app.route('/')
 def index():
-    if 'count' not in session:
-        session['count'] = 0
-    else:
-        session['count'] += 1
-
-    return f'Count: {session["count"]}'
+    #     if 'count' not in session:
+    #         session['count'] = 0
+    #     else:
+    #         session['count'] += 1
+    #
+    #     return f'Count: {session["count"]}'
+    return 'Hi'
 
 
 @app.route('/users')
 def users():
-    if not session.get('authenticated'):
-        return redirect(url_for('login'))
+    # if not session.get('authenticated'):
+    #     return redirect(url_for('login'))
 
     users_data = repo.load_user_data()
     search = request.args.get('term', '')
